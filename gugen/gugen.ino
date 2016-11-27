@@ -25,6 +25,7 @@ const char MQTT_CLIENTID[] PROGMEM  = __TIME__ MILKCOCOA_APP_ID;
 const char* SSID     = "GWLab";
 const char* PASSWORD = "kuzlab2000";
 
+const int RADIO_MODE = 0;
 const int ECHO_MODE = 1;
 
 WiFiClient client;
@@ -37,6 +38,14 @@ long start_time;
 long current_time;
 int mode=0;
 float rate=0.45;
+
+boolean radio_mode = false;
+boolean echo_mode = false;
+enum Command {
+  FORWARD, BACK, TURN_RIGHT, TURN_LEFT, STOP
+};
+
+Command radio_command;
 
 void setupWiFi() {
   Serial.println();
@@ -75,14 +84,58 @@ void search_object() {
   }
 }
 
+void drive(Command command) {
+  /*radicon*/
+  switch(command){
+    case FORWARD:
+    bentroid.move(true);
+    break;
+    
+    case BACK:
+    bentroid.move(false);
+    break;
+    
+    case TURN_RIGHT://right
+    bentroid.curve(LEFT,0);
+    break;
+    
+    case TURN_LEFT://left
+    bentroid.curve(RIGHT,0);
+    break;
+    
+    case STOP:
+    bentroid.stop();
+    break;
+  }
+}
+
 
 
 void onpush(DataElement *elem) {
   int mode = elem->getInt("mode");
   int command = elem->getInt("command");
 
-  if(mode == ECHO_MODE) {
-     search_object();
+  echo_mode = mode == ECHO_MODE;
+  if(mode == RADIO_MODE) {
+    switch(command) {
+      case 0:
+        drive(FORWARD);
+        break;
+      case 1:
+        drive(BACK);
+        break;
+      case 2:
+        drive(TURN_RIGHT);
+        break;
+      case 3:
+        drive(TURN_LEFT);
+        break;
+      case 4:
+        drive(STOP);
+        break;
+      default:
+        break;
+    }
   }
 }
 
@@ -112,6 +165,10 @@ void loop(){
   
   // put your setup code here, to run once:
   milkcocoa.on(DATASTORE, "push", onpush);
+
+  if(echo_mode) {
+    search_object();
+  }
   
   if(200*rate<50){
     delay(3600);
@@ -119,55 +176,6 @@ void loop(){
     bentroid.Black_switch(false);
     return;
   }
-
-  /*radicon*/
-  switch(hogehoge){
-    case 0://forward
-    bentroid.move(true);
-    break;
-    
-    case 1://back
-    bentroid.move(false);
-    break;
-    
-    case 2://right
-    bentroid.curve(LEFT,0);
-    break;
-    
-    case 3://left
-    bentroid.curve(RIGHT,0);
-    break;
-    
-    case 4:
-    bentroid.stop();
-    break;
-  }
-
-  /*guruguru*/
-  /*
-  current_time=millis();
-  if(current_time-start_time>8000){
-    rate=rate*0.9;
-    start_time=current_time;
-  }
-  bentroid.curve(rate);
-  //Serial.println(current_time);
-  */
-  
-  /*
-  switch(mode){
-    case 0:
-    bentroid.move(true);
-    delay(2000);
-    break;
-    case 1:
-    bentroid.curve(1);
-    delay(3600);
-    break;
-  }
-  mode=(mode+1)%2;
-  */
-  
 
 }
 
