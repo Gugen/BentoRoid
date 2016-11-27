@@ -20,6 +20,8 @@
 #define Motor_Forward_2 6
 #define Motor_Reverse_2 5
 
+#define LEFT true
+#define RIGHT false
 class Motor
 {
 public:
@@ -40,21 +42,17 @@ class Bentroid
   
 public:
   Bentroid(int speed); //min75?, max255
+  Motor motor1;
+  Motor motor2;
   bool direction;
   void move(bool forward);
-  void curve(float speed_rate);
+  void curve(bool left_turn,float speed_rate);
   void stop();
   void Black_switch(bool onof);
   float Get_dist();
   int default_speed;
-
-
-
 private:
-  int f_pin1;
-  int r_pin1;
-  int f_pin2;
-  int r_pin2;
+
 };
 
 
