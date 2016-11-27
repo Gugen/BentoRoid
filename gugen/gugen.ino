@@ -141,7 +141,9 @@ void onpush(DataElement *elem) {
 
 
 void setup(){
-  Serial.begin(9600);
+  Serial.begin(115200);
+  setupWiFi();
+  
   pinMode(FORWARD_1,OUTPUT);
   pinMode(REVERSE_1,OUTPUT);
   pinMode(FORWARD_2,OUTPUT);
@@ -159,10 +161,6 @@ void setup(){
 }
 
 void loop(){
-
-  Serial.begin(115200);
-  setupWiFi();
-  
   // put your setup code here, to run once:
   milkcocoa.on(DATASTORE, "push", onpush);
 
