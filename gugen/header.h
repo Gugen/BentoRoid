@@ -42,6 +42,8 @@ class Bentroid
   
 public:
   Bentroid(int speed); //min75?, max255
+  Motor motor1;
+  Motor motor2;
   bool direction;
   void move(bool forward);
   void curve(bool left_turn,float speed_rate);
@@ -49,14 +51,8 @@ public:
   void Black_switch(bool onof);
   float Get_dist();
   int default_speed;
-
-
-
 private:
-  int f_pin1;
-  int r_pin1;
-  int f_pin2;
-  int r_pin2;
+
 };
 
 
