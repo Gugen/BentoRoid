@@ -65,19 +65,30 @@ void Bentroid::move(bool forward){
   }
 }
 
-void Bentroid::curve(float speed_rate){
+void Bentroid::curve(bool left_turn,float speed_rate){
   Motor motor1(f_pin1,r_pin1,default_speed);
   Motor motor2(f_pin2,r_pin2,default_speed);
   if(speed_rate<0){
     Serial.println("error");
     return ;
   }
-  if(direction==true){
-    motor1.move(FORWARD_1,default_speed);
-    motor2.move(FORWARD_2,default_speed*speed_rate);
-  }else{
-    motor1.move(REVERSE_1,default_speed*speed_rate);
-    motor2.move(REVERSE_2,default_speed);
+  if(left_turn==true){
+    if(direction==true){
+      motor1.move(FORWARD_1,default_speed);
+      motor2.move(FORWARD_2,default_speed*speed_rate);
+    }else{
+      motor1.move(REVERSE_1,default_speed*speed_rate);
+      motor2.move(REVERSE_2,default_speed);
+    }
+  }
+  else{
+    if(direction==true){
+      motor1.move(FORWARD_1,default_speed*speed_rate);
+      motor2.move(FORWARD_2,default_speed);
+    }else{
+      motor1.move(REVERSE_1,default_speed);
+      motor2.move(REVERSE_2,default_speed*speed_rate);
+    }
   }
   
 }

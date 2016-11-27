@@ -120,6 +120,31 @@ void loop(){
     return;
   }
 
+  /*radicon*/
+  switch(hogehoge){
+    case 0://forward
+    bentroid.move(true);
+    break;
+    
+    case 1://back
+    bentroid.move(false);
+    break;
+    
+    case 2://right
+    bentroid.curve(LEFT,0);
+    break;
+    
+    case 3://left
+    bentroid.curve(RIGHT,0);
+    break;
+    
+    case 4:
+    bentroid.stop();
+    break;
+  }
+
+  /*guruguru*/
+  /*
   current_time=millis();
   if(current_time-start_time>8000){
     rate=rate*0.9;
@@ -127,6 +152,8 @@ void loop(){
   }
   bentroid.curve(rate);
   //Serial.println(current_time);
+  */
+  
   /*
   switch(mode){
     case 0:

@@ -20,6 +20,8 @@
 #define Motor_Forward_2 6
 #define Motor_Reverse_2 5
 
+#define LEFT true
+#define RIGHT false
 class Motor
 {
 public:
@@ -42,7 +44,7 @@ public:
   Bentroid(int speed); //min75?, max255
   bool direction;
   void move(bool forward);
-  void curve(float speed_rate);
+  void curve(bool left_turn,float speed_rate);
   void stop();
   void Black_switch(bool onof);
   float Get_dist();
