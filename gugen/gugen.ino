@@ -36,7 +36,9 @@ void search_object() {
   dist=dist/10.0;
 
   if(dist<5){
+    char obj = 'B';
     byte found_object = 1;
+    Serial.write(mode);
     Serial.write(found_object);
     bentroid.direction=!bentroid.direction;
   }
