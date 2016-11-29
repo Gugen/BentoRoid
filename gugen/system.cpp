@@ -92,12 +92,21 @@ void Bentroid::stop(){
   motor2.stop();
 }
 
-void Bentroid::Black_switch(bool onof){
-  if(onof==true){
+void Bentroid::Black_switch(bool onoff){
+  if(onoff==true){
     digitalWrite(Black_LED,HIGH);
   }
   else{
     digitalWrite(Black_LED,LOW);
+  }
+}
+
+void Bentroid::color_led_switch(bool onoff){
+  if(onoff==true){
+    digitalWrite(LED,HIGH);
+  }
+  else{
+    digitalWrite(LED,LOW);
   }
 }
 
