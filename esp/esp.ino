@@ -63,6 +63,7 @@ void sendData(char mode,byte command) {
 }
 
 int getData() {
+  Serial.read();
   int found_object = Serial.read();  
   return found_object;
 }
@@ -85,12 +86,11 @@ void setup(){
 void loop(){
   milkcocoa.loop();
   DataElement elem = DataElement();
-  if(Serial.available()) {
-    int obj = Serial.read();
-     elem.setValue("obj", obj);
-     milkcocoa.push(DATASTORE, &elem);
+  if(Serial.available() >= sizeof('B') + sizeof(byte)) {
+    int obj = getData();
+    elem.setValue("obj", obj);
+    milkcocoa.push(DATASTORE, &elem);
   }
- 
 }
 
 
