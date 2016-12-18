@@ -13,15 +13,15 @@
 #include <Milkcocoa.h>
 #include <ESP8266WiFi.h>
 
-#define MILKCOCOA_APP_ID      "guitariw0hgcep"
+#define MILKCOCOA_APP_ID      "your_app_id"
 #define MILKCOCOA_SERVERPORT  1883
 #define DATASTORE "esp8266"
 
 const char MQTT_SERVER[] PROGMEM    = MILKCOCOA_APP_ID ".mlkcca.com";
 const char MQTT_CLIENTID[] PROGMEM  = __TIME__ MILKCOCOA_APP_ID;
 
-const char* SSID     = "GWLab";
-const char* PASSWORD = "kuzlab2000";
+const char* SSID     = "your_ssd_id";
+const char* PASSWORD = "your_passwd";
 
 const int RADIO_MODE = 0;
 const int ECHO_MODE = 1;

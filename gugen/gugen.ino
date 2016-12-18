@@ -93,6 +93,37 @@ void radio_controle(int command) {
   }
 }
 
+void pattern_syoryuken() {
+  while(true){
+    while(true) {
+      boolean break_curve = random(100) < 40;
+      bentroid.curve(RIGHT, 0);
+      if(break_curve) break;
+    }
+    while(true){
+      boolean break_back = random(100) < 40;
+      bentroid.move(false);
+      if(break_back) break;
+    }
+    boolean finish_pattern = random(100) < 5;
+    if(finish_pattern) break;
+  }
+}
+
+void pattern_flower() {
+  for(int i=0; i < 10; i++) {
+    bentroid.move(true);
+    delay(2000);
+    bentroid.stop();
+    delay(2000);
+    bentroid.curve(LEFT, 1);
+    delay(2000);
+    bentroid.stop();
+    delay(2000);
+  }
+}
+
+
 
 void setup(){
   Serial.begin(9600);
@@ -138,6 +169,7 @@ void mode_switch(char m){
 }
 
 void loop(){
+  /*
   // 受信バッファに３バイト（ヘッダ＋int）以上のデータが着ているか確認
   if (  Serial.available() >= sizeof('H') + sizeof(byte)) {
     // ヘッダの確認
@@ -148,12 +180,13 @@ void loop(){
     }
     Serial.println(command);
     mode_switch(mode);
-  }
-
+  }*/
+  echo_mode = true;
   if(echo_mode) {
     search_object();
     bentroid.move(true);
-  }
+    pattern_flower();
+  }/*
   else if(radio_mode){
     radio_controle(command);
     
@@ -161,7 +194,7 @@ void loop(){
 
   else if(off_mode){
     bentroid.stop();
-  }
+  }*/
 }
 
 
